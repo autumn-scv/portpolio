@@ -25,4 +25,10 @@ describe('작업물 상세', () => {
     expect(window.gtag).toHaveBeenCalledWith('event', 'contact_click', { work: 'bappy' })
     delete window.gtag
   })
+  it('mp4 항목을 고르면 영상으로 보여준다', async () => {
+    const wrapper = mountWith('tingle')
+    expect(wrapper.find('video.main-image').exists()).toBe(false)
+    await wrapper.findAll('.thumb')[1].trigger('click')
+    expect(wrapper.find('video.main-image').exists()).toBe(true)
+  })
 })

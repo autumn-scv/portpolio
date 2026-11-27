@@ -12,10 +12,15 @@
             v-for="(img, i) in work.images" :key="img" type="button" class="thumb"
             :class="{ active: i === current }" @click="current = i"
           >
-            <img :src="imageUrl(img)" :alt="`${work.title} ${i + 1}`" />
+            <video v-if="isVideo(img)" :src="`${imageUrl(img)}#t=2`" muted preload="metadata" />
+            <img v-else :src="imageUrl(img)" :alt="`${work.title} ${i + 1}`" />
           </button>
         </div>
-        <img class="main-image" :src="imageUrl(work.images[current])" :alt="work.title" />
+        <video
+          v-if="isVideo(work.images[current])" class="main-image" :src="imageUrl(work.images[current])"
+          autoplay muted loop playsinline controls
+        />
+        <img v-else class="main-image" :src="imageUrl(work.images[current])" :alt="work.title" />
       </div>
       <div class="info">
         <span v-if="work.isNew" class="badge">NEW</span>
@@ -59,6 +64,8 @@ function toggleWish() {
   if (wished.value) track('add_to_wishlist', { work: props.slug })
 }
 
+const isVideo = (name) => name.endsWith('.mp4')
+
 function imageUrl(name) {
   return new URL(`../assets/works/${props.slug}/${name}`, import.meta.url).href
 }
@@ -70,9 +77,11 @@ function imageUrl(name) {
 .breadcrumb a { text-decoration: none; }
 .body { display: flex; gap: 4rem; flex-wrap: wrap; }
 .gallery { display: flex; gap: 1rem; flex: 1 1 480px; }
-.thumbs { display: flex; flex-direction: column; gap: 0.5rem; width: 64px; overflow-y: auto; max-height: 640px; }
+.thumbs { display: flex; flex-direction: column; gap: 0.5rem; flex: none; width: 64px; overflow-y: auto; max-height: 640px; }
+.thumbs img { width: 62px; display: block; }
 .thumbs button { padding: 0; border: 1px solid #eee; background: none; cursor: pointer; }
 .thumbs button.active { border-color: #1a1a1a; }
+.thumbs video { width: 62px; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
 .main-image { flex: 1; object-fit: contain; max-height: 640px; }
 .info { flex: 1 1 360px; }
 .badge { background: #1a1a1a; color: #fff; font-weight: 700; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; }
