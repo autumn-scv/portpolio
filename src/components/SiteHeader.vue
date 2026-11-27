@@ -3,7 +3,7 @@
     <span class="icon-btn" aria-hidden="true">☰</span>
     <router-link to="/" class="logo">Chogaeul</router-link>
     <nav class="icons">
-      <span class="icon-btn" aria-hidden="true">🔍</span>
+      <router-link :to="{ path: '/works', query: { search: null } }" class="profile" aria-label="작업 검색" title="작업 검색">🔍</router-link>
       <router-link to="/wishlist" class="profile" aria-label="찜한 작업" title="찜한 작업">♡</router-link>
       <a href="/portfolio/" class="profile" aria-label="포트폴리오" title="포트폴리오">👤</a>
     </nav>
