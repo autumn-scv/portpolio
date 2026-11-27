@@ -82,7 +82,7 @@ function imageUrl(name) {
 .thumbs button { padding: 0; border: 1px solid #eee; background: none; cursor: pointer; }
 .thumbs button.active { border-color: #1a1a1a; }
 .thumbs video { width: 62px; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
-.main-image { flex: 1; min-width: 0; width: 100%; object-fit: contain; max-height: 640px; }
+.main-image { flex: 1; min-width: 0; width: 100%; align-self: flex-start; object-fit: contain; max-height: 640px; }
 .info { flex: 1 1 360px; }
 .badge { background: #1a1a1a; color: #fff; font-weight: 700; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; }
 h1 { font-size: 2.2rem; margin: 0.5rem 0 0; }
