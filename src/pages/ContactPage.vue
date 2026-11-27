@@ -5,17 +5,21 @@
       <p class="subtitle">You can contact me through the channels below.</p>
     </div>
     <div class="contact-grid">
-      <a href="https://www.linkedin.com/in/autumnrkf/" target="_blank" rel="noopener" class="contact-card">
+      <a href="https://www.linkedin.com/in/autumnrkf/" target="_blank" rel="noopener" class="contact-card" @click="track('generate_lead', { method: 'linkedin' })">
         <div class="icon" aria-hidden="true">💼</div>
         <div class="label">linkedin.com/in/autumnrkf</div>
       </a>
-      <a href="mailto:whgaeul@gmail.com" class="contact-card">
+      <a href="mailto:whgaeul@gmail.com" class="contact-card" @click="track('generate_lead', { method: 'email' })">
         <div class="icon" aria-hidden="true">💬</div>
         <div class="label">whgaeul@gmail.com</div>
       </a>
     </div>
   </section>
 </template>
+
+<script setup>
+import { track } from '../analytics.js'
+</script>
 
 <style scoped>
 .contact {

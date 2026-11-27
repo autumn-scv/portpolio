@@ -23,7 +23,7 @@
         <p class="price">{{ work.date }}</p>
         <p class="summary">{{ work.summary }}</p>
         <p class="description">{{ work.description }}</p>
-        <router-link class="cart" to="/contact">채용 문의하기</router-link>
+        <router-link class="cart" to="/contact" @click="track('contact_click', { work: slug })">채용 문의하기</router-link>
         <button class="wish" type="button" @click="toggleWish">{{ wished ? '♥ 찜한 작업' : '♡ 찜하기' }}</button>
         <details><summary>작업 개요</summary><p>{{ work.summary }}</p></details>
         <details><summary>작업 형태</summary><p>{{ work.category === '굿즈' ? '실물 굿즈 작업입니다.' : '디지털 작업물입니다.' }}</p></details>
@@ -40,6 +40,7 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { findWork } from '../data/works.js'
+import { track } from '../analytics.js'
 
 const props = defineProps({ slug: { type: String, required: true } })
 const work = computed(() => findWork(props.slug))
@@ -55,6 +56,7 @@ function toggleWish() {
     ? wishlist.value.filter((s) => s !== props.slug)
     : [...wishlist.value, props.slug]
   localStorage.setItem(WISH_KEY, JSON.stringify(wishlist.value))
+  if (wished.value) track('add_to_wishlist', { work: props.slug })
 }
 
 function imageUrl(name) {
