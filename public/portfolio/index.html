@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<base href="/portfolio/">
+<meta name="viewport" content="width=1280">
+<title>조가을 백엔드 포트폴리오</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<style>
+  @page { size: 1280px 720px; margin: 0; }
+  :root { --ink:#111418; --sub:#6b7280; --mute:#9aa1ab; --line:#e5e7eb; --rule:#2b2f36; --bad:#d64545; --good:#1f9d62; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Pretendard, "Malgun Gothic", sans-serif; color: var(--ink); background: #fff;
+         word-break: keep-all; overflow-wrap: break-word; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  section { width: 1280px; height: 720px; padding: 48px 64px; position: relative; overflow: hidden; break-after: page; display: grid; grid-template-columns: 500px 1fr; column-gap: 56px; }
+  section:last-child { break-after: auto; }
+  .pg { position: absolute; right: 64px; bottom: 22px; font-size: 11px; color: var(--mute); }
+
+  /* 오른쪽 본문 */
+  .proj { font-size: 15px; color: var(--sub); margin-bottom: 4px; }
+  h1 { font-size: 31px; font-weight: 800; line-height: 1.28; letter-spacing: -0.5px; margin-bottom: 18px; }
+  h2 { font-size: 17px; font-weight: 800; padding-bottom: 6px; border-bottom: 1px solid var(--rule); margin: 16px 0 8px; }
+  h2:first-of-type { margin-top: 0; }
+  h3 { font-size: 13.5px; font-weight: 700; color: var(--sub); margin: 8px 0 3px; }
+  ul { list-style: none; }
+  li { font-size: 14px; line-height: 1.55; padding-left: 13px; position: relative; margin-bottom: 2px; }
+  li::before { content: ""; position: absolute; left: 2px; top: 9.5px; width: 4px; height: 4px; border-radius: 50%; background: var(--ink); }
+  code { font-family: "JetBrains Mono", Consolas, monospace; font-size: 0.9em; background: #f3f4f6; padding: 0 3px; border-radius: 3px; }
+  .note { font-size: 11.5px; color: var(--sub); margin-top: 12px; line-height: 1.5; }
+  table.kv { width: 100%; border-collapse: collapse; }
+  table.kv td { font-size: 14px; line-height: 1.5; padding: 3px 0; vertical-align: top; }
+  table.kv td:first-child { width: 112px; font-weight: 700; padding-right: 12px; }
+
+  /* 왼쪽: Before/After 도식 */
+  .left { display: flex; flex-direction: column; justify-content: center; gap: 18px; }
+  .seq .t { font-size: 15px; color: var(--mute); margin-bottom: 6px; }
+  .seq .t.bad { color: var(--bad); } .seq .t.good { color: var(--good); }
+  .seq svg { width: 100%; display: block; }
+  .seq svg text { font-family: Pretendard, sans-serif; }
+  .shot img { width: 100%; max-height: 270px; object-fit: cover; object-position: top; display: block; border: 1px solid var(--line); border-radius: 6px; }
+  .shot p { font-size: 13px; color: var(--sub); margin-top: 6px; }
+
+  /* 표지 */
+  .cover { grid-template-columns: 1fr 470px; column-gap: 72px; }
+  .cover .photo { width: 150px; height: 188px; object-fit: cover; border-radius: 10px; margin-bottom: 22px; }
+  .cover h1 { font-size: 30px; margin-bottom: 18px; }
+  .cover .intro { font-size: 15px; line-height: 1.7; color: #2d3239; }
+  .contact { margin-top: 22px; display: grid; grid-template-columns: 62px 1fr; row-gap: 4px; font-size: 14px; }
+  .contact dt { color: var(--sub); }
+  .cv h2 { font-size: 16px; margin: 0 0 7px; }
+  .cv h2 ~ h2 { margin-top: 16px; }
+  .cv table { width: 100%; border-collapse: collapse; }
+  .cv td { font-size: 13.5px; line-height: 1.5; padding: 2px 0; vertical-align: top; }
+  .cv td:first-child { width: 132px; color: #2d3239; }
+  .cv td small { color: var(--sub); font-size: 12.5px; }
+  .lv { display: inline-flex; gap: 2px; margin-right: 6px; vertical-align: -1px; }
+  .lv b, .lv i { width: 9px; height: 9px; display: inline-block; }
+  .lv b { background: var(--ink); } .lv i { background: #dcdfe3; }
+  .lvk { font-size: 11px; font-weight: 400; color: var(--sub); margin-left: 6px; }
+
+  /* 개요의 숫자 */
+  .kpi { display: grid; grid-template-columns: 1fr 1fr; gap: 26px 28px; }
+  .kpi div { border-top: 2px solid var(--rule); padding-top: 10px; }
+  .kpi b { display: block; font-size: 40px; font-weight: 800; letter-spacing: -1px; line-height: 1.1; }
+  .kpi span { font-size: 13.5px; color: var(--sub); }
+  .how { margin-top: 30px; }
+  .how li { font-size: 13.5px; }
+  @media screen { body { background:#eef0f3; padding:24px 0; } section { margin:0 auto 24px; background:#fff; box-shadow:0 1px 4px rgba(0,0,0,.08); } }
+</style>
+</head>
+<body>
+
+<!-- 1. 표지 -->
+<section class="cover">
+  <div style="align-self:center">
+    <img class="photo" src="img/photo.jpg" alt="조가을 증명사진">
+    <h1>조가을:<br>사용자의 실수가 사고로<br>번지지 않게 설계하는 백엔드 개발자</h1>
+    <p class="intro">사람은 언젠가 실수한다는 전제로 설계합니다.<br>지운 문서는 휴지통에서 되살릴 수 있게, 지운 회의록은 중복으로 다시 생기지 않게,<br>여러 탭에서 동시에 써도 로그인이 풀리지 않게 만들었습니다.<br>왜 그렇게 정했는지는 설계 문서와 커밋 메시지에 남기고, 실제 DB와 Redis에서 직접 확인합니다.</p>
+    <dl class="contact">
+      <dt>email</dt><dd>whgaeul@gmail.com</dd>
+      <dt>github</dt><dd>github.com/autumn-scv</dd>
+      <dt>blog</dt><dd>autumn2.tistory.com</dd>
+    </dl>
+  </div>
+  <div class="cv" style="align-self:center">
+    <h2>Education</h2>
+    <table>
+      <tr><td>2026.01 ~ 진행 중</td><td>삼성 청년 SW·AI 아카데미(SSAFY) 15기<br><small>1,725시간</small></td></tr>
+      <tr><td>2026.02 졸업</td><td>동아대학교 미디어커뮤니케이션학과</td></tr>
+    </table>
+    <h2>Awards</h2>
+    <table>
+      <tr><td>2025.08.20</td><td>부산광역시 소방재난본부장 표창<br><small>PTSD 인식개선 다큐, 팀 사담 프로덕션 · 책임 PD</small></td></tr>
+    </table>
+    <h2>Skills <small class="lvk">숙련도 5단계 중 2단계(초급), 프로젝트 경험 기준</small></h2>
+    <table>
+      <tr><td>Java · Spring Boot</td><td><span class="lv"><b></b><b></b><i></i><i></i><i></i></span> REST API 설계·구현·테스트</td></tr>
+      <tr><td>JPA</td><td><span class="lv"><b></b><b></b><i></i><i></i><i></i></span> 소프트 삭제 필터, 프로젝션 조회</td></tr>
+      <tr><td>PostgreSQL · MySQL</td><td><span class="lv"><b></b><b></b><i></i><i></i><i></i></span> 유니크 제약, 부분 인덱스, Flyway</td></tr>
+      <tr><td>Redis</td><td><span class="lv"><b></b><b></b><i></i><i></i><i></i></span> Lua로 토큰 회전 원자화</td></tr>
+      <tr><td>Vue 3 · React</td><td><span class="lv"><b></b><b></b><i></i><i></i><i></i></span> 화면 구현과 API 연동</td></tr>
+      <tr><td>Tools</td><td>Docker Compose, GitLab, Figma</td></tr>
+    </table>
+    <h2>Certifications</h2>
+    <table>
+      <tr><td>2025.11</td><td>OPIc IM1</td></tr>
+      <tr><td>2019.10</td><td>한국사능력검정시험 2급</td></tr>
+    </table>
+  </div>
+  <div class="pg">1</div>
+</section>
+
+<!-- 청년 유치원 -->
+<section>
+  <div class="left">
+    <div class="shot"><img src="img/youthgarten-lecture.png" alt="청년 유치원 강의 화면" style="max-height:none"><p>강의 화면 · 실제로 본 구간만 수강률에 반영</p></div>
+    <div class="shot"><img src="img/youthgarten-characters.png" alt="청년 유치원 캐릭터" style="max-height:210px"><p>캐릭터 픽셀 아트</p></div>
+  </div>
+  <div>
+    <p class="proj">청년 유치원 · 2026 대한민국 청년 CAREER FAIR AI 해커톤</p>
+    <h1>강의를 보고 AI 시험관과 실무 과제를 푸는<br>2D 메타버스 교육 서비스</h1>
+    <h2>프로젝트 개요</h2>
+    <table class="kv">
+      <tr><td>대회</td><td>대한상공회의소 주관, 예선 참가</td></tr>
+      <tr><td>기간</td><td>2026.11.19 ~ 11.23 (5일)</td></tr>
+      <tr><td>규모</td><td>4인 (FE 2, BE·AI 2), 팀 대표</td></tr>
+      <tr><td>역할</td><td>프론트엔드, 본인 커밋 52건</td></tr>
+      <tr><td>기술</td><td>React 19, TypeScript, Phaser 4, TanStack Query, Vitest</td></tr>
+      <tr><td>배포</td><td>youthgarten.vercel.app</td></tr>
+    </table>
+    <h2>담당 역할</h2>
+    <table class="kv">
+      <tr><td>맵·캐릭터</td><td>2D 광장·강의실·시험장 맵, 캐릭터와 건물 픽셀 아트, 문 근처에서 건물 안이 보이는 미리보기</td></tr>
+      <tr><td>강의 화면</td><td>탭을 닫거나 새로고침·로그아웃해도 마지막 시청 구간을 보고</td></tr>
+      <tr><td>연결 유지</td><td>토큰 재발급이 통신 문제로 실패하면 로그인을 유지하고 다시 시도,<br>맵 소켓도 멈추지 않고 재연결</td></tr>
+      <tr><td>그 밖의 화면</td><td>로그인·가입, HUD·튜토리얼, 멀티플레이 연동</td></tr>
+    </table>
+    <p class="note">구현에는 Claude Code·Codex CLI를 썼고, 화면·캐릭터 디자인 방향 결정과 코드 리뷰·수정·테스트는 직접 맡았습니다. 시험·결과 화면과 백엔드·AI 채점은 팀원 담당입니다.</p>
+  </div>
+  <div class="pg">2</div>
+</section>
+
+<!-- Tingle 개요 -->
+<section>
+  <div class="left">
+    <div class="kpi">
+      <div><b>57</b><span>본인 커밋 (머지 제외)</span></div>
+      <div><b>56</b><span>본인 MR</span></div>
+      <div><b>6주</b><span>2026.10.07 ~ 11.18</span></div>
+      <div><b>6인</b><span>BE · 앱 · AI · IoT</span></div>
+    </div>
+    <ul class="how">
+      <li>개인정보는 동의가 있을 때만 저장하고, 철회하면 복사본까지 지운다</li>
+      <li>동시에 들어오는 요청은 회원 행 잠금으로 순서를 정한다</li>
+      <li>요청마다 추적 번호를 남기되 로그에 입력값은 남기지 않는다</li>
+    </ul>
+  </div>
+  <div>
+    <p class="proj">Tingle · SSAFY 자율 프로젝트</p>
+    <h1>키링이 스쳐 지나간 사람을<br>소개해 주는 오프라인 소개팅</h1>
+    <h2>프로젝트 개요</h2>
+    <table class="kv">
+      <tr><td>소개</td><td>BLE 키링을 든 두 사람이 마주치면, 서버가 그 만남을 검증해 매칭 제안으로 잇는 서비스</td></tr>
+      <tr><td>기간</td><td>2026.10.07 ~ 11.18 (6주)</td></tr>
+      <tr><td>규모</td><td>6인</td></tr>
+      <tr><td>역할</td><td>백엔드 (인증 · 가입 · 동의 · 매칭 제안)</td></tr>
+      <tr><td>기술</td><td>Java 21, Spring Boot 4, JPA, PostgreSQL 17, Testcontainers</td></tr>
+    </table>
+    <h2>담당 역할</h2>
+    <table class="kv">
+      <tr><td>인증</td><td>소셜 로그인·세션, 네이버 로그인 OIDC 전환, 로그인 기기 1개 제한</td></tr>
+      <tr><td>가입·동의</td><td>가입 단계, 약관·선택 동의, 동의 없는 종교·자기소개·사진 저장 차단</td></tr>
+      <tr><td>매칭</td><td>키링 만남 기록 → 매칭 제안 연결, 매칭 이유 저장·조회</td></tr>
+      <tr><td>운영</td><td>요청 횟수 제한, 요청 추적 번호, 서버 상태 확인, 포팅 매뉴얼</td></tr>
+    </table>
+    <p class="note">앱(Kotlin Multiplatform), AI 서버, 키링 펌웨어, 배포 인프라는 팀원 담당입니다.</p>
+  </div>
+  <div class="pg">3</div>
+</section>
+
+<!-- Tingle 동의 철회 -->
+<section>
+  <div class="left"><div class="seq"><div class="t bad">Before — 원본만 삭제</div><svg data-seq='{"actors":["사용자","API","DB"],"msgs":[[0,1,"종교 정보 동의 철회"],[1,2,"프로필의 종교 값 삭제"],[2,2,"과거 설정 사본·매칭 근거엔 그대로 남음","bad"],[1,0,"200 — 사본은 계속 쓰일 수 있음","bad"]]}'></svg></div><div class="seq"><div class="t good">After — 사본까지 폐기</div><svg data-seq='{"actors":["사용자","API","DB"],"msgs":[[0,1,"종교 정보 동의 철회"],[1,2,"회원 행 잠금 후 원본·사본·해시 폐기"],[2,2,"중복 접수 막는 키만 표시로 남김","good"],[1,0,"200 — 철회한 정보가 어디에도 안 남음","good"]]}'></svg></div></div>
+  <div>
+    <p class="proj">Tingle</p>
+    <h1>동의를 거둬 가면,<br>복사본까지 함께 지워지게</h1>
+    <h2>문제</h2>
+    <ul>
+      <li>종교는 사용자가 선택해서 주는 민감한 정보인데, 동의를 철회해도 프로필 값만 지워졌다</li>
+      <li>매칭을 계산할 때 만든 과거 설정 사본과 매칭 근거에는 종교 정보가 그대로 남아 있었다</li>
+    </ul>
+    <h2>해결과정</h2>
+    <h3>판단</h3>
+    <ul>
+      <li>원본만 지우면 "지웠다"고 말할 수 없다. 그 값에서 나온 사본과 해시도 같이 사라져야 한다</li>
+      <li>다만 채팅과 매칭 제안까지 지우면 상대방의 대화가 깨지므로 그대로 둔다</li>
+    </ul>
+    <h3>행동</h3>
+    <ul>
+      <li>먼저 동의 없는 종교·자기소개·사진은 저장 자체를 막았다 (403)</li>
+      <li>철회하면 회원 행을 잠근 뒤, 그 정보에 기댄 매칭 기록의 원문과 해시를 폐기</li>
+      <li>같은 만남이 다시 접수되지 않도록 중복 방지 키만 "폐기됨" 표시로 남김</li>
+      <li>기능 배포 전에 이미 철회한 회원의 사본도 서버 기동 시 정리</li>
+    </ul>
+    <h2>결과</h2>
+    <ul>
+      <li>철회한 종교 정보가 원본·사본·매칭 근거 어디에도 남지 않는다</li>
+      <li>평가 중에 철회해도 지운 근거가 되살아나지 않고, 다시 동의한 뒤 기록은 지워지지 않는 것을 테스트로 확인</li>
+    </ul>
+    <p class="note">PostgreSQL Testcontainers 통합 테스트 · 커밋 c4918e6b (2026-11-02), d7eda97d (2026-11-04)</p>
+  </div>
+  <div class="pg">4</div>
+</section>
+
+<!-- 6. G-shared 개요 -->
+<section>
+  <div class="left">
+    <div class="shot"><img src="img/gshared-03-dashboard.png" alt="G-shared 대시보드"><p>대시보드 화면</p></div>
+    <div class="shot"><img src="img/gshared-05-job-wizard.png" alt="G-shared 작업 등록"><p>워크로드 등록 화면</p></div>
+  </div>
+  <div>
+    <p class="proj">G-shared</p>
+    <h1>개인의 유휴 GPU로<br>AI 파인튜닝을 돌리는 플랫폼</h1>
+    <h2>프로젝트 개요</h2>
+    <table class="kv">
+      <tr><td>기간</td><td>2026.08 ~ 09</td></tr>
+      <tr><td>규모</td><td>6인</td></tr>
+      <tr><td>역할</td><td>백엔드 + 프론트 + develop 통합</td></tr>
+      <tr><td>기여</td><td>본인 커밋 190+, develop 통합 머지 59</td></tr>
+      <tr><td>기술</td><td>Java 21, Spring Boot 4, JPA, MySQL 8, Redis, Next.js</td></tr>
+    </table>
+    <h2>담당 역할</h2>
+    <table class="kv">
+      <tr><td>인증</td><td>refresh 토큰 기기별 회전 (다음 장)</td></tr>
+      <tr><td>주문 흐름</td><td>수요자가 고른 GPU 등급이 견적 → 주문 → 작업까지 같은 값으로 이어지게</td></tr>
+      <tr><td>진행 상태</td><td>학습 진행 상태 SSE, 하트비트와 상태 점검 스레드 풀 분리</td></tr>
+      <tr><td>화면</td><td>온체인 패널(예치 금액·정산 기한), 작업 종료 알림</td></tr>
+      <tr><td>통합</td><td>팀의 MR을 리뷰하고 develop에 통합,<br>AI 리뷰·보안 리뷰 지적을 커밋 단위로 반영</td></tr>
+    </table>
+    <p class="note">블록체인 컨트랙트와 AI 스케줄러는 팀원 담당입니다.</p>
+  </div>
+  <div class="pg">5</div>
+</section>
+
+<!-- 7. G-shared 토큰 -->
+<section>
+  <div class="left"><div class="seq"><div class="t bad">Before — 탭 두 개가 동시에 재발급</div><svg data-seq='{"actors":["탭 A","탭 B","API","Redis"],"msgs":[[0,2,"refresh(R1)"],[1,2,"refresh(R1)"],[2,3,"R2 저장, 이어 R3로 덮어씀"],[2,0,"200 (R2) — 쿠키와 서버가 어긋남","bad"],[0,2,"다음 재발급 → 재사용 판정"],[2,0,"401 — 세션 영구 폐기","bad"]]}'></svg></div><div class="seq"><div class="t good">After — Lua 원자 회전 + 유예</div><svg data-seq='{"actors":["탭 A","탭 B","API","Redis"],"msgs":[[0,2,"refresh(R1)"],[1,2,"refresh(R1)"],[2,3,"Lua 1회: ROTATED 1 · GRACE 1"],[2,0,"200 (R2)","good"],[2,1,"200 (같은 R2)","good"],[0,2,"다음 재발급 → 정상 회전","good"]]}'></svg></div></div>
+  <div>
+    <p class="proj">G-shared</p>
+    <h1>잠깐 쓰다 보면<br>로그인이 풀리던 문제</h1>
+    <h2>문제</h2>
+    <ul>
+      <li>시연 동선에서 대시보드가 <code>reason=expired</code>로 튕기고, 다시 로그인하기 전까지 복구되지 않았다</li>
+    </ul>
+    <h2>해결과정</h2>
+    <h3>판단: 원인 셋이 겹쳤다</h3>
+    <ul>
+      <li>사용자당 키 하나라 다른 기기 로그인이 덮어씀</li>
+      <li>읽기·비교·쓰기가 따로라 동시 재발급 경합</li>
+      <li>경합까지 탈취로 보고 세션 폐기</li>
+    </ul>
+    <h3>행동</h3>
+    <ul>
+      <li>로그인 1회 = 패밀리 1개, 키를 <code>refresh:{userId}:{fid}</code>로</li>
+      <li>회전을 Redis Lua 한 번으로 원자화</li>
+      <li>경합에서 진 쪽은 현재 토큰을 받아 가고, 유예가 지난 재사용만 그 패밀리를 폐기</li>
+    </ul>
+    <h2>결과</h2>
+    <ul>
+      <li>실제 Redis 통합 테스트에서 8스레드가 동시에 회전해도 회전은 정확히 1건, 재사용 판정 0건</li>
+      <li>백엔드 전체 테스트 419건 통과</li>
+    </ul>
+    <p class="note">AI 리뷰 반영: 회전 결과를 모르면 500 대신 재사용으로 닫고, 유예 경계·구버전 토큰 테스트 5건 추가 · 커밋 45a5908, bdf8d4b (2026-09-28)</p>
+  </div>
+  <div class="pg">6</div>
+</section>
+
+<!-- 2. secome 개요 -->
+<section>
+  <div class="left">
+    <div class="shot"><img src="img/secome-doc-detail.png" alt="secome 문서 상세"><p>문서 상세 화면 · 폴더 경로(문서 › 명세서 › API)와 본문</p></div>
+    <div class="kpi">
+      <div><b>110</b><span>본인 커밋 (author 기준)</span></div>
+      <div><b>27</b><span>본인 MR</span></div>
+      <div><b>8</b><span>문서 REST API</span></div>
+      <div><b>6</b><span>스키마 변경 마이그레이션</span></div>
+    </div>
+    <ul class="how">
+      <li>설계 문서를 먼저 쓰고 커밋 메시지에 왜를 남긴다</li>
+      <li>H2가 잡지 못하는 FK·CASCADE는 로컬 PostgreSQL에서 트랜잭션 롤백으로 직접 검증</li>
+      <li>코드 리뷰 지적을 반영해 응답 DTO에서 domain enum을 String으로 분리</li>
+    </ul>
+  </div>
+  <div>
+    <p class="proj">secome</p>
+    <h1>회의가 끝나면 문서가 남는 협업 플랫폼</h1>
+    <h2>프로젝트 개요</h2>
+    <table class="kv">
+      <tr><td>소개</td><td>회의 녹음이 회의록 문서로 자동 생성·축적되는 협업 서비스</td></tr>
+      <tr><td>기간</td><td>2026.06.30 ~ 08.09 (6주), 본인 집중 개발 4주</td></tr>
+      <tr><td>규모</td><td>6인 (BE 4, FE 1, AI 1)</td></tr>
+      <tr><td>역할</td><td>문서·폴더 도메인 백엔드</td></tr>
+      <tr><td>기술</td><td>Spring Boot, JPA, PostgreSQL, Flyway</td></tr>
+    </table>
+    <h2>담당 역할</h2>
+    <table class="kv">
+      <tr><td>문서 API</td><td>생성·목록·상세·트리·수정·이동·이름 변경·삭제 8개 설계·구현·테스트</td></tr>
+      <tr><td>폴더 도메인</td><td>폴더 도입, 문서 자기참조 제거 (ADR 0011)</td></tr>
+      <tr><td>휴지통</td><td>문서·폴더·회의록 soft delete와 회의록 복구</td></tr>
+      <tr><td>팀 규칙</td><td>CONVENTION.md, GitLab 이슈·MR 템플릿 작성,<br>응답 필드명 parentId → folderId 통일</td></tr>
+    </table>
+    <p class="note">AI 회의록 생성, STT 처리, CI/CD는 팀원 담당입니다.</p>
+  </div>
+  <div class="pg">7</div>
+</section>
+
+<!-- 3. secome 휴지통 -->
+<section>
+  <div class="left"><div class="seq"><div class="t bad">Before — 하드 삭제</div><svg data-seq='{"actors":["사용자","API","DB"],"msgs":[[0,1,"DELETE /folders/{id}"],[1,2,"DELETE folders"],[2,2,"ON DELETE CASCADE → 하위 문서 소멸","bad"],[1,0,"204 — 복구 불가","bad"]]}'></svg></div><div class="seq"><div class="t good">After — 휴지통</div><svg data-seq='{"actors":["사용자","API","DB"],"msgs":[[0,1,"DELETE /folders/{id}"],[1,2,"deleted_at = t (자신+자손 같은 t)"],[2,2,"WHERE deleted_at IS NULL 부분 인덱스","good"],[1,0,"204 — t 묶음으로 복구 가능","good"]]}'></svg></div></div>
+  <div>
+    <p class="proj">secome</p>
+    <h1>지우면 끝이던 삭제를,<br>되돌릴 수 있는 삭제로</h1>
+    <h2>문제</h2>
+    <ul>
+      <li>문서·폴더 삭제가 행을 바로 지웠다</li>
+      <li>폴더 하나를 실수로 지우면 하위 문서까지 FK CASCADE로 함께 사라지고 되돌릴 길이 없었다</li>
+    </ul>
+    <h2>해결과정</h2>
+    <h3>판단</h3>
+    <ul>
+      <li>걸러야 할 조회가 14곳이고, 다수가 Spring Data가 만든 <code>findById</code>라 손으로 조건을 넣을 자리가 없다</li>
+      <li>쿼리마다 기억에 맡기면 언젠가 빠진다</li>
+    </ul>
+    <h3>행동</h3>
+    <ul>
+      <li><code>deleted_at</code> + <code>@SQLRestriction</code>으로 모든 조회에 자동 필터</li>
+      <li>CASCADE 대신 자손 폴더·문서에 같은 시각을 찍어 묶음 복구 키로</li>
+      <li>살아 있는 행만 담는 부분 인덱스</li>
+    </ul>
+    <h2>결과</h2>
+    <ul>
+      <li>새로 추가되는 쿼리도 지워진 행을 자동으로 보지 않는다</li>
+      <li>휴지통이 쌓여도 인덱스에는 살아 있는 행만 남는다</li>
+    </ul>
+    <p class="note"><code>@SQLRestriction</code>은 JPQL UPDATE에는 붙지 않아 일괄 UPDATE에 <code>AND deleted_at IS NULL</code>을 직접 넣었다 · 커밋 641ccf2, 4019c01, e8b51df (2026-08-03)</p>
+  </div>
+  <div class="pg">8</div>
+</section>
+
+<!-- 4. secome 회의록 -->
+<section>
+  <div class="left"><div class="seq"><div class="t bad">Before — 필터가 지워진 회의록을 가림</div><svg data-seq='{"actors":["프론트","API","AI","DB"],"msgs":[[0,1,"POST /minutes"],[1,3,"findByMeetingId → 없음 (필터됨)"],[1,2,"회의록 생성 (최대 3분)"],[1,3,"INSERT → 유니크 위반","bad"],[1,0,"409 — AI 토큰 낭비","bad"]]}'></svg></div><div class="seq"><div class="t good">After — 호출 전에 판별</div><svg data-seq='{"actors":["프론트","API","AI","DB"],"msgs":[[0,1,"POST /minutes"],[1,3,"지워진 행 포함 조회 → 지워짐"],[1,0,"409 MINUTES_005 복구 안내","good"],[0,1,"PATCH /minutes/restore"],[1,0,"200 + 되살린 본문","good"]]}'></svg></div></div>
+  <div>
+    <p class="proj">secome</p>
+    <h1>회의록은 되살릴 수는 있어도,<br>다시 만들 수는 없게</h1>
+    <h2>문제</h2>
+    <ul>
+      <li>회의록에도 휴지통을 붙이자, 지운 뒤 같은 회의로 다시 생성하면 원본과 거의 같은 회의록이 하나 더 생길 수 있었다</li>
+    </ul>
+    <h2>해결과정</h2>
+    <h3>판단</h3>
+    <ul>
+      <li>회의 발화는 끝나면 고정이라 재생성은 같은 결과를 낸다</li>
+      <li>내용이 싫으면 수정, 지운 걸 되돌리려면 복구하면 되니 재생성은 필요 없다</li>
+    </ul>
+    <h3>행동</h3>
+    <ul>
+      <li>유니크 제약 <code>uk_meeting_minutes_meeting_id</code>를 일부러 유지해, 지운 행이 자리를 차지하고 DB가 재생성을 막게 함</li>
+      <li>지워진 행까지 보는 쿼리 하나로 없음 / 살아 있음 / 지워짐 판별</li>
+    </ul>
+    <h2>결과</h2>
+    <ul>
+      <li>재생성 요청은 AI 호출 전에 <code>409 MINUTES_005</code>로 끊기고, 프론트는 이 코드로 복구 버튼을 띄운다</li>
+      <li>마이그레이션은 한 줄로 끝났다</li>
+    </ul>
+    <p class="note">복구는 필터를 타지 않는 네이티브 UPDATE, 영향 행 0이면 404 · 삭제는 낙관적 락으로 편집과의 충돌을 409로 변환 · 커밋 09e2765, 9743420 (2026-08-04)</p>
+  </div>
+  <div class="pg">9</div>
+</section>
+
+<!-- 5. secome 폴더 -->
+<section>
+  <div class="left"><div class="seq"><div class="t bad">Before — 엔티티 통째 조회</div><svg data-seq='{"actors":["프론트","API","DB"],"msgs":[[0,1,"GET /documents/tree"],[1,2,"SELECT * FROM documents"],[2,1,"id·title·parent_id + content(TEXT)","bad"],[1,0,"content는 버리고 트리만 응답"]]}'></svg></div><div class="seq"><div class="t good">After — 폴더 트리 + 프로젝션</div><svg data-seq='{"actors":["프론트","API","DB"],"msgs":[[0,1,"GET /projects/{id}/tree"],[1,2,"folders + documents(id, title, folder_id)"],[2,1,"본문 없이 필요한 열만","good"],[1,0,"폴더·문서가 섞인 한 트리","good"]]}'></svg></div></div>
+  <div>
+    <p class="proj">secome</p>
+    <h1>문서가 문서를 품던 모델을 버리고,<br>계층은 폴더가 갖게</h1>
+    <h2>문제</h2>
+    <ul>
+      <li>문서가 <code>parent_id</code>로 다른 문서를 품는 구조가 팀의 멘탈 모델(폴더 안의 문서)과 맞지 않았다</li>
+      <li>트리 조회는 응답에 쓰지 않는 본문(TEXT)까지 읽었다</li>
+    </ul>
+    <h2>해결과정</h2>
+    <h3>판단</h3>
+    <ul>
+      <li>폴더를 만들 수단 없이 테이블만 넣으면 트리가 영원히 평평하다</li>
+      <li>생성·삭제는 같은 변경에 담고, 이름 변경·이동은 뒤로 미룬다. 근거는 ADR 0011</li>
+    </ul>
+    <h3>행동</h3>
+    <ul>
+      <li>folders 도입, <code>documents.parent_id</code> 제거</li>
+      <li>트리를 <code>GET /projects/{id}/tree</code>로 옮겨 폴더·문서를 한 트리로</li>
+      <li>id·title만 담는 프로젝션으로 본문 미조회</li>
+    </ul>
+    <h2>결과</h2>
+    <ul>
+      <li>트리 한 번에 폴더와 문서가 함께 내려가고, 본문은 상세 조회에서만 읽는다</li>
+      <li>이후 이동·이름 변경 API가 같은 모델 위에 붙었다</li>
+    </ul>
+    <p class="note">H2는 FK를 만들지 않아 CASCADE를 테스트가 못 잡는다 → 로컬 PostgreSQL에서 마이그레이션을 트랜잭션 롤백으로 적용해 확인 · 커밋 f8fb942 (07-28), 1041e68 (07-29)</p>
+  </div>
+  <div class="pg">10</div>
+</section>
+
+<!-- 9. 혼자소누리 -->
+<section>
+  <div class="left">
+    <div class="shot"><img src="img/sonuri-01-home.png" alt="혼자소누리 메인"><p>메인 화면</p></div>
+    <div class="shot"><img src="img/sonuri-02-login.png" alt="혼자소누리 로그인"><p>로그인 화면</p></div>
+  </div>
+  <div>
+    <p class="proj">혼자소누리</p>
+    <h1>화면부터 API까지,<br>둘이서 일주일 만에</h1>
+    <h2>프로젝트 개요</h2>
+    <table class="kv">
+      <tr><td>소개</td><td>Vue + Django 노코드 쇼핑몰 빌더</td></tr>
+      <tr><td>기간</td><td>2026.06.22 ~ 06.26</td></tr>
+      <tr><td>규모</td><td>2인, 본인 커밋 26건</td></tr>
+    </table>
+    <h2>담당 역할</h2>
+    <table class="kv">
+      <tr><td>프론트엔드</td><td>로그인·회원가입, 커뮤니티·고객센터 목록/상세/작성, 유튜브 연동, 관리자 백오피스(대시보드, 카테고리·공지 CRUD, 회원 목록, 영상 관리), 몰·상품·마이페이지·튜토리얼 화면</td></tr>
+      <tr><td>백엔드</td><td>support(문의)·community 도메인 구현, malls·accounts·products·categories 일부</td></tr>
+    </table>
+    <h2>배운 것</h2>
+    <ul>
+      <li>화면에 필요한 데이터를 API 단계부터 맞춰 두면 붙이는 단계에서 어긋날 일이 줄어든다</li>
+      <li>그래서 secome에서는 응답 필드명 하나를 고칠 때도 프론트엔드가 쓰는지부터 확인했고, 팀 컨벤션·MR 템플릿도 먼저 만들었다</li>
+    </ul>
+    <p class="note">AI 스튜디오(Segment Anything·Stable Diffusion)는 팀원 담당입니다.</p>
+  </div>
+  <div class="pg">11</div>
+</section>
+
+<!-- 8. nona -->
+<section>
+  <div class="left">
+    <div class="shot"><img src="img/nona-home.png" alt="nona 메인"><p>메인 화면 · nona-woad.vercel.app</p></div>
+    <div class="shot"><img src="img/nona-works.png" alt="nona 작업물 목록"><p>작업물 목록 화면</p></div>
+  </div>
+  <div>
+    <p class="proj">nona · 개인 프로젝트</p>
+    <h1>그리기만 하던 사람이<br>배포까지 혼자 끝낸 포트폴리오 사이트</h1>
+    <table class="kv" style="margin-bottom:4px">
+      <tr><td>기간</td><td>2026.08, 개인</td></tr>
+      <tr><td>흐름</td><td>Figma 38화면 설계 → AI 페어 코딩으로 Vue 3 구현 → Vercel 배포</td></tr>
+    </table>
+    <h2>문제</h2>
+    <ul>
+      <li>배포 후 상세 페이지에서 새로고침하면 404가 났다</li>
+      <li>작업물을 하나 추가할 때마다 목록·상세 여러 파일을 고쳐야 했다</li>
+    </ul>
+    <h2>해결과정</h2>
+    <ul>
+      <li>재현 조건을 좁혀 보니 첫 화면은 되고 깊은 경로만 실패. 서버에 없는 경로를 SPA 라우터가 아니라 정적 서버가 받고 있었다</li>
+      <li><code>vercel.json</code> rewrite로 모든 경로를 index.html로</li>
+      <li>콘텐츠를 <code>works.js</code> 하나로 모으는 리팩터링을 일정보다 먼저, Vitest 테스트 9개</li>
+    </ul>
+    <h2>결과</h2>
+    <ul>
+      <li>객체 하나만 추가하면 목록과 상세가 함께 늘어난다</li>
+      <li>코드는 도구가 쓰고, 무엇을 만들지 정하고 제대로 됐는지 확인하는 일은 내가 맡는 분업을 익혔다</li>
+    </ul>
+    <p class="note">구현에는 AI 페어 코딩을 썼고, 범위 확정(Figma)·요구사항 명세·실행 검증·구조 결정은 직접 맡았습니다.</p>
+  </div>
+  <div class="pg">12</div>
+</section>
+
+<!-- 10. 개발 전 경험 -->
+<section style="grid-template-columns: 1fr; align-content: center;">
+  <div>
+    <p class="proj">Before Development</p>
+    <h1>개발 전에도, 어긋나기 전에 막는 사람이었습니다</h1>
+    <h2>PTSD 인식개선 다큐 · 책임 PD</h2>
+    <ul>
+      <li>2025 · 동아대 캡스톤 팀 '사담 프로덕션' 11인 · 부산소방재난본부 협업</li>
+      <li>영상 편집을 맡고 11인 팀을 이끌며 의견을 조율해 기한 안에 완성했고, 부산광역시 소방재난본부장 표창(2025.08.20)을 받았습니다</li>
+    </ul>
+    <h2>나이키 직원 매장 · 3년 9개월</h2>
+    <ul>
+      <li>2022.03 ~ 2025.11 주말 근무 · 재고와 VMD 관리</li>
+      <li>화면의 재고와 진열대의 실제 수량이 어긋나면 고객과의 약속을 지킬 수 없다는 것을 배웠고, 요청이 오기 전에 부족한 사이즈를 채워 두는 습관을 들였습니다</li>
+    </ul>
+    <h2>BAPPY · 책GPT · 기획/UI 설계</h2>
+    <ul>
+      <li>1인 가구 공동 주문 앱(3인, 플로우 20여 개, 반경 매칭·랜드마크 픽업), 기억으로 책을 찾는 AI 검색(5인, 3단계 플로우)</li>
+      <li>구현 없이 기획·UI만 맡았고, 그린 것을 만들지 못한다는 한계 때문에 개발을 시작했습니다</li>
+    </ul>
+  </div>
+  <div class="pg">13</div>
+</section>
+
+<script>
+// 시퀀스 다이어그램: data-seq = {actors:[...], msgs:[[from,to,label,"bad"|"good"]]}
+document.querySelectorAll('svg[data-seq]').forEach((svg, n) => {
+  const { actors, msgs } = JSON.parse(svg.dataset.seq);
+  const W = 560, top = 26, gap = 30, H = top + msgs.length * gap + 14;
+  const x = i => 40 + i * (W - 80) / (actors.length - 1);
+  const col = k => k === 'bad' ? '#d64545' : k === 'good' ? '#1f9d62' : '#1b1f24';
+  let s = `<defs>${['bad','good','n'].map(k => `<marker id="a${k}${n}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="${col(k)}"/></marker>`).join('')}</defs>`;
+  actors.forEach((a, i) => s += `<text x="${x(i)}" y="14" text-anchor="middle" font-size="12" font-weight="700">${a}</text><line x1="${x(i)}" y1="20" x2="${x(i)}" y2="${H}" stroke="#c8ced6" stroke-dasharray="3 3"/>`);
+  msgs.forEach(([f, t, label, k], j) => {
+    const y = top + 12 + j * gap, c = col(k), m = `url(#a${k || 'n'}${n})`;
+    if (f === t) {
+      s += `<path d="M${x(f)} ${y-6} h22 v12 h-20" fill="none" stroke="${c}" marker-end="${m}"/><text x="${x(f) - 8}" y="${y + 4}" text-anchor="end" font-size="11.5" fill="${c}">${label}</text>`;
+    } else {
+      s += `<line x1="${x(f)}" y1="${y}" x2="${x(t)}" y2="${y}" stroke="${c}" ${t < f ? 'stroke-dasharray="4 3"' : ''} marker-end="${m}"/><text x="${(x(f) + x(t)) / 2}" y="${y - 5}" text-anchor="middle" font-size="11.5" fill="${c}">${label}</text>`;
+    }
+  });
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = s;
+});
+</script>
+</body>
+</html>
