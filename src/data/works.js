@@ -135,7 +135,7 @@ const works = [
     category: '굿즈',
     summary: '개인 브랜드 명함 디자인',
     description: '개인 브랜드 아이덴티티를 담은 명함 시리즈입니다.',
-    images: ['00-cover.png', '01.png', '02.png', '03.png'],
+    images: ['02.png', '01.png', '03.png'],
   },
   {
     slug: 'ecobag',
