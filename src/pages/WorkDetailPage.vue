@@ -76,13 +76,13 @@ function imageUrl(name) {
 .breadcrumb { font-size: 0.85rem; color: #888; margin-bottom: 2rem; }
 .breadcrumb a { text-decoration: none; }
 .body { display: flex; gap: 4rem; flex-wrap: wrap; }
-.gallery { display: flex; gap: 1rem; flex: 1 1 480px; }
+.gallery { display: flex; gap: 1rem; flex: 1 1 480px; min-width: 0; }
 .thumbs { display: flex; flex-direction: column; gap: 0.5rem; flex: none; width: 64px; overflow-y: auto; max-height: 640px; }
 .thumbs img { width: 62px; display: block; }
 .thumbs button { padding: 0; border: 1px solid #eee; background: none; cursor: pointer; }
 .thumbs button.active { border-color: #1a1a1a; }
 .thumbs video { width: 62px; display: block; aspect-ratio: 16 / 9; object-fit: cover; background: #000; }
-.main-image { flex: 1; object-fit: contain; max-height: 640px; }
+.main-image { flex: 1; min-width: 0; width: 100%; object-fit: contain; max-height: 640px; }
 .info { flex: 1 1 360px; }
 .badge { background: #1a1a1a; color: #fff; font-weight: 700; font-size: 0.75rem; padding: 0.2rem 0.6rem; border-radius: 4px; }
 h1 { font-size: 2.2rem; margin: 0.5rem 0 0; }

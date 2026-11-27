@@ -12,7 +12,7 @@ const works = [
       '프론트엔드를 맡아 React·TypeScript·Phaser로 광장·강의실·시험장 맵과 캐릭터 픽셀 아트를 이미지 파일 없이 코드로 그렸고, ' +
       '탭을 닫아도 마지막으로 본 위치를 저장하는 강의 화면과 인터넷이 잠깐 끊겨도 로그아웃되지 않는 연결 유지를 만들었습니다. ' +
       '구현에는 AI 코딩 도구를 썼고, 디자인 방향과 코드 검토·테스트는 직접 했습니다.',
-    images: ['01-map.png', '02-lecture.png', '03-characters.png'],
+    images: ['00-logo.png', '01-map.png', '02-lecture.png', '03-characters.png'],
   },
   {
     slug: 'tingle',
