@@ -14,7 +14,7 @@
 import { computed } from 'vue'
 const props = defineProps({ work: { type: Object, required: true } })
 const thumb = computed(
-  () => new URL(`../assets/works/${props.work.slug}/${props.work.images[0]}`, import.meta.url).href,
+  () => new URL(`../assets/works/${props.work.slug}/${props.work.cover ?? props.work.images[0]}`, import.meta.url).href,
 )
 </script>
 

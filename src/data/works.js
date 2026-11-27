@@ -1,4 +1,5 @@
 // 작업물 추가 = 객체 하나 + assets/works/<slug>/ 이미지. 코드 수정 없음.
+// 카드 사진은 images[0], 따로 쓰려면 cover 에 파일 이름.
 const works = [
   {
     slug: 'youthgarten',
@@ -25,6 +26,7 @@ const works = [
       '6인 팀에서 백엔드를 맡아 소셜 로그인, 가입·동의, 매칭 제안과 "우리가 만난 이유" 저장·전달을 만들었습니다. ' +
       '종교 같은 민감한 정보는 동의가 있을 때만 저장하고, 동의를 철회하면 매칭에 쓰인 복사본까지 지우게 했습니다. ' +
       '앱, 소개 웹페이지, 키링은 팀원이 만들었습니다.',
+    cover: 'card.png',
     images: [
       'landing.png', 'intro.mp4', 'step2.png', 'step3.png',
       '01-app.jpg', '02-app.jpg', '03-app.jpg', '04-app.jpg', '05-app.jpg',
