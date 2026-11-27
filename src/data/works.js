@@ -1,8 +1,34 @@
 // 작업물 추가 = 객체 하나 + assets/works/<slug>/ 이미지. 코드 수정 없음.
 const works = [
   {
-    slug: 'gshared',
+    slug: 'youthgarten',
     isNew: true,
+    title: '청년 유치원',
+    date: '2026.11',
+    category: '개발',
+    summary: '강의를 보고 AI 시험관과 실무 과제를 푸는 2D 메타버스 교육 서비스 (AI 해커톤 예선)',
+    description:
+      '대한상공회의소 주관 AI 해커톤 예선에 4인 팀 대표로 참가해 5일 동안 만든 서비스입니다. ' +
+      '프론트엔드를 맡아 React·TypeScript·Phaser로 광장·강의실·시험장 맵과 캐릭터 픽셀 아트를 직접 그렸고, ' +
+      '탭을 닫아도 마지막으로 본 위치를 저장하는 강의 화면과 인터넷이 잠깐 끊겨도 로그아웃되지 않는 연결 유지를 만들었습니다. ' +
+      '구현에는 AI 코딩 도구를 썼고, 디자인 방향과 코드 검토·테스트는 직접 했습니다.',
+    images: ['01-map.png', '02-lecture.png', '03-characters.png'],
+  },
+  {
+    slug: 'tingle',
+    title: 'Tingle',
+    date: '2026.11',
+    category: '개발',
+    summary: '키링이 스쳐 지나간 사람을 소개해 주는 오프라인 소개팅 (SSAFY 자율 프로젝트)',
+    description:
+      '블루투스 키링을 든 두 사람이 마주치면, 서버가 진짜 만남인지 확인하고 서로에게 매칭을 제안하는 서비스입니다. ' +
+      '6인 팀에서 백엔드를 맡아 소셜 로그인, 가입·동의, 매칭 제안과 "우리가 만난 이유" 저장·전달을 만들었습니다. ' +
+      '종교 같은 민감한 정보는 동의가 있을 때만 저장하고, 동의를 철회하면 매칭에 쓰인 복사본까지 지우게 했습니다. ' +
+      '앱과 키링은 팀원이 만들었습니다.',
+    images: ['06-keyring.jpg', '01-app.jpg', '02-app.jpg', '03-app.jpg', '04-app.jpg', '05-app.jpg', '07-board.jpg'],
+  },
+  {
+    slug: 'gshared',
     title: 'G-shared',
     date: '2026.09',
     category: '개발',
@@ -109,7 +135,7 @@ const works = [
     category: '굿즈',
     summary: '개인 브랜드 명함 디자인',
     description: '개인 브랜드 아이덴티티를 담은 명함 시리즈입니다.',
-    images: ['01.png', '02.png', '03.png'],
+    images: ['00-cover.png', '01.png', '02.png', '03.png'],
   },
   {
     slug: 'ecobag',
