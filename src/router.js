@@ -3,6 +3,7 @@ import HomePage from './pages/HomePage.vue'
 import WorkListPage from './pages/WorkListPage.vue'
 import WorkDetailPage from './pages/WorkDetailPage.vue'
 import ContactPage from './pages/ContactPage.vue'
+import WishlistPage from './pages/WishlistPage.vue'
 import NotFoundPage from './pages/NotFoundPage.vue'
 
 export const routes = [
@@ -10,6 +11,7 @@ export const routes = [
   { path: '/works', component: WorkListPage },
   { path: '/works/:slug', component: WorkDetailPage, props: true },
   { path: '/contact', component: ContactPage },
+  { path: '/wishlist', component: WishlistPage },
   { path: '/:pathMatch(.*)*', component: NotFoundPage },
 ]
 
