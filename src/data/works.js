@@ -63,11 +63,17 @@ const works = [
     description:
       '회의가 끝나면 회의록과 문서가 남는 협업 플랫폼입니다. 6인 팀에서 문서·폴더 도메인 백엔드를 맡아 ' +
       'Spring Boot·JPA·PostgreSQL로 REST API 8개를 설계·구현했습니다. ' +
-      '지우면 끝이던 삭제를 휴지통(deleted_at + 살아 있는 행만 담는 부분 인덱스)으로 바꾸고, ' +
+      '지우면 끝이던 삭제를 지워도 행이 남는 방식(soft delete: deleted_at + 살아 있는 행만 담는 부분 인덱스)으로 바꾸고, ' +
       '회의록은 유니크 제약을 일부러 유지해 재생성은 막고 복구로만 되돌리게 했습니다. ' +
       '문서가 문서를 품던 모델을 폴더 도메인으로 바꾸고 트리 조회가 본문을 읽지 않게 했습니다.',
     images: [
       'secome-00-cover.png',
+      'screen-01-dashboard.png',
+      'screen-02-explorer.png',
+      'screen-03-menu.png',
+      'screen-04-delete.png',
+      'screen-05-minutes-list.png',
+      'screen-06-minutes.png',
       'secome-02-trash.png',
       'secome-03-minutes.png',
       'secome-04-folder.png',
